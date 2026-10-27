@@ -1,0 +1,27 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.PatientNotificationsModel
+@{
+    ViewData["Title"] = "Notifications";
+    Layout = "_PatientLayout";
+}
+
+<h2><i class="fas fa-bell"></i> Notifications</h2>
+<hr />
+
+@if (!Model.HasNotification)
+{
+    <div class="alert alert-info"><i class="fas fa-info-circle"></i> No new notifications.</div>
+}
+else
+{
+    <div class="card shadow col-md-6">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0"><i class="fas fa-bell"></i> Appointment Approved!</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Doctor:</strong> @Model.DoctorName</p>
+            <p><strong>Appointment Time:</strong> @Model.Timings</p>
+            <p class="text-success"><i class="fas fa-check-circle"></i> Your appointment has been approved by the doctor.</p>
+        </div>
+    </div>
+}

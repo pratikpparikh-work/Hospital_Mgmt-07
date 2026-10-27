@@ -1,0 +1,48 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.AppointmentTakerModel
+@{
+    ViewData["Title"] = "Book Appointment";
+    Layout = "_PatientLayout";
+}
+
+<h2><i class="fas fa-calendar-plus"></i> Book Appointment</h2>
+<hr />
+
+@if (!Model.FreeSlots.Any())
+{
+    <div class="alert alert-warning">
+        <i class="fas fa-exclamation-triangle"></i> No available slots for this doctor at the moment.
+        <a href="/Patient/ViewDoctors" class="btn btn-secondary btn-sm ms-2">Back to Doctors</a>
+    </div>
+}
+else
+{
+    <div class="card shadow col-md-8">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Available Slots for Dr. @Model.DoctorName</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <input type="hidden" name="doctorId" value="@Model.DoctorId" />
+                <div class="mb-3">
+                    <label class="form-label">Select a Time Slot:</label>
+                    @foreach (var slot in Model.FreeSlots)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="slotId" value="@slot.SlotId" id="slot_@slot.SlotId" required />
+                            <label class="form-check-label" for="slot_@slot.SlotId">
+                                @slot.Date.ToString("dddd, MMMM dd, yyyy") - @slot.Timings
+                            </label>
+                        </div>
+                    }
+                </div>
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-check"></i> Confirm Appointment
+                </button>
+                <a href="/Patient/ViewDoctors" class="btn btn-secondary ms-2">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+            </form>
+        </div>
+    </div>
+}

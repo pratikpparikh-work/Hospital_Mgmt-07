@@ -1,0 +1,113 @@
+@page
+@model ClinicManagement.Web.Pages.Admin.DoctorRegistrationFormModel
+@{
+    ViewData["Title"] = "Add Doctor";
+    Layout = "_AdminLayout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="fas fa-user-md"></i> Doctor Registration</h4>
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.Message))
+                {
+                    <div class="alert @(Model.Success ? "alert-success" : "alert-danger") alert-dismissible fade show">
+                        @Model.Message
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DoctorInput.Name" class="form-label">Full Name *</label>
+                            <input asp-for="DoctorInput.Name" class="form-control" />
+                            <span asp-validation-for="DoctorInput.Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DoctorInput.Email" class="form-label">Email *</label>
+                            <input asp-for="DoctorInput.Email" class="form-control" />
+                            <span asp-validation-for="DoctorInput.Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DoctorInput.Password" class="form-label">Password *</label>
+                            <input asp-for="DoctorInput.Password" type="password" class="form-control" />
+                            <span asp-validation-for="DoctorInput.Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DoctorInput.BirthDate" class="form-label">Birth Date *</label>
+                            <input asp-for="DoctorInput.BirthDate" type="date" class="form-control" />
+                            <span asp-validation-for="DoctorInput.BirthDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DoctorInput.DeptNo" class="form-label">Department *</label>
+                            <select asp-for="DoctorInput.DeptNo" class="form-select">
+                                <option value="">-- Select Department --</option>
+                                @foreach (var dept in Model.DoctorInput.Departments)
+                                {
+                                    <option value="@dept.DeptNo">@dept.DeptName</option>
+                                }
+                            </select>
+                            <span asp-validation-for="DoctorInput.DeptNo" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DoctorInput.Phone" class="form-label">Phone *</label>
+                            <input asp-for="DoctorInput.Phone" class="form-control" />
+                            <span asp-validation-for="DoctorInput.Phone" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Gender *</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="DoctorInput.Gender" value="M" id="genderM" />
+                                    <label class="form-check-label" for="genderM">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="DoctorInput.Gender" value="F" id="genderF" />
+                                    <label class="form-check-label" for="genderF">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DoctorInput.Address" class="form-label">Address *</label>
+                            <input asp-for="DoctorInput.Address" class="form-control" />
+                            <span asp-validation-for="DoctorInput.Address" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="DoctorInput.WorkExperience" class="form-label">Work Experience (years)</label>
+                            <input asp-for="DoctorInput.WorkExperience" type="number" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="DoctorInput.Salary" class="form-label">Monthly Salary</label>
+                            <input asp-for="DoctorInput.Salary" type="number" class="form-control" />
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="DoctorInput.ChargesPerVisit" class="form-label">Charges Per Visit</label>
+                            <input asp-for="DoctorInput.ChargesPerVisit" type="number" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DoctorInput.Specialization" class="form-label">Specialization</label>
+                            <input asp-for="DoctorInput.Specialization" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DoctorInput.Qualification" class="form-label">Qualification *</label>
+                            <input asp-for="DoctorInput.Qualification" class="form-control" />
+                            <span asp-validation-for="DoctorInput.Qualification" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Register Doctor
+                        </button>
+                        <a href="/Admin/AdminHome" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

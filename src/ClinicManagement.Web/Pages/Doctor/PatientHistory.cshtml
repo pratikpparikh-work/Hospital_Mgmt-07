@@ -1,0 +1,59 @@
+@page
+@model ClinicManagement.Web.Pages.Doctor.PatientHistoryModel
+@{
+    ViewData["Title"] = "Today's Patients";
+    Layout = "_DoctorLayout";
+}
+
+<h2><i class="fas fa-calendar-day"></i> Today's Patients</h2>
+<hr />
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert @(Model.Success ? "alert-success" : "alert-danger") alert-dismissible fade show">
+        @Model.Message
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (!Model.Appointments.Any())
+{
+    <div class="alert alert-info"><i class="fas fa-info-circle"></i> No appointments for today.</div>
+}
+else
+{
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Patient</th>
+                            <th>Time</th>
+                            <th>Disease</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var appt in Model.Appointments)
+                        {
+                            <tr>
+                                <td>@appt.AppointId</td>
+                                <td>@appt.PatientName</td>
+                                <td>@appt.Date?.ToString("HH:mm")</td>
+                                <td>@appt.Disease</td>
+                                <td>
+                                    <a href="/Doctor/HistoryUpdate?appointmentId=@appt.AppointId&patientName=@appt.PatientName"
+                                       class="btn btn-primary btn-sm">
+                                        <i class="fas fa-edit"></i> Update
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

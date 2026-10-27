@@ -1,0 +1,120 @@
+@page
+@model ClinicManagement.Web.Pages.SignUpModel
+@{
+    ViewData["Title"] = "Login / Register";
+    Layout = "_Layout";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-10">
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white text-center py-4">
+                <h2><i class="fas fa-hospital"></i> Clinic Management System</h2>
+                <p class="mb-0">Your Health, Our Priority</p>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <!-- Login Section -->
+                    <div class="col-md-5">
+                        <h4 class="text-center mb-4"><i class="fas fa-sign-in-alt"></i> Login</h4>
+
+                        @if (!string.IsNullOrEmpty(Model.LoginMessage))
+                        {
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                @Model.LoginMessage
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        }
+
+                        <form method="post" asp-page-handler="Login">
+                            <div class="mb-3">
+                                <label asp-for="LoginInput.Email" class="form-label">Email Address</label>
+                                <input asp-for="LoginInput.Email" class="form-control" placeholder="Enter your email" />
+                                <span asp-validation-for="LoginInput.Email" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="LoginInput.Password" class="form-label">Password</label>
+                                <input asp-for="LoginInput.Password" class="form-control" placeholder="Enter your password" />
+                                <span asp-validation-for="LoginInput.Password" class="text-danger"></span>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-sign-in-alt"></i> Login
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-2 d-flex align-items-center justify-content-center">
+                        <div class="vr d-none d-md-block" style="height: 100%;"></div>
+                        <span class="d-md-none text-muted my-3">OR</span>
+                    </div>
+
+                    <!-- Register Section -->
+                    <div class="col-md-5">
+                        <h4 class="text-center mb-4"><i class="fas fa-user-plus"></i> Register as Patient</h4>
+
+                        @if (!string.IsNullOrEmpty(Model.RegisterMessage))
+                        {
+                            <div class="alert @(Model.RegisterSuccess ? "alert-success" : "alert-danger") alert-dismissible fade show" role="alert">
+                                @Model.RegisterMessage
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        }
+
+                        <form method="post" asp-page-handler="Register">
+                            <div class="mb-2">
+                                <label asp-for="RegisterInput.Name" class="form-label">Full Name</label>
+                                <input asp-for="RegisterInput.Name" class="form-control" placeholder="Enter your full name" />
+                                <span asp-validation-for="RegisterInput.Name" class="text-danger"></span>
+                            </div>
+                            <div class="mb-2">
+                                <label asp-for="RegisterInput.BirthDate" class="form-label">Birth Date</label>
+                                <input asp-for="RegisterInput.BirthDate" type="date" class="form-control" />
+                                <span asp-validation-for="RegisterInput.BirthDate" class="text-danger"></span>
+                            </div>
+                            <div class="mb-2">
+                                <label asp-for="RegisterInput.Email" class="form-label">Email</label>
+                                <input asp-for="RegisterInput.Email" class="form-control" placeholder="Enter your email" />
+                                <span asp-validation-for="RegisterInput.Email" class="text-danger"></span>
+                            </div>
+                            <div class="mb-2">
+                                <label asp-for="RegisterInput.Password" class="form-label">Password</label>
+                                <input asp-for="RegisterInput.Password" class="form-control" placeholder="Create a password" />
+                                <span asp-validation-for="RegisterInput.Password" class="text-danger"></span>
+                            </div>
+                            <div class="mb-2">
+                                <label asp-for="RegisterInput.PhoneNo" class="form-label">Phone Number</label>
+                                <input asp-for="RegisterInput.PhoneNo" class="form-control" placeholder="Enter phone number" />
+                                <span asp-validation-for="RegisterInput.PhoneNo" class="text-danger"></span>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Gender</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="RegisterInput.Gender" value="M" id="genderM" />
+                                        <label class="form-check-label" for="genderM">Male</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="RegisterInput.Gender" value="F" id="genderF" />
+                                        <label class="form-check-label" for="genderF">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <label asp-for="RegisterInput.Address" class="form-label">Address</label>
+                                <input asp-for="RegisterInput.Address" class="form-control" placeholder="Enter your address" />
+                                <span asp-validation-for="RegisterInput.Address" class="text-danger"></span>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="fas fa-user-plus"></i> Register
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

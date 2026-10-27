@@ -1,0 +1,46 @@
+@page
+@model ClinicManagement.Web.Pages.Patient.DoctorProfileModel
+@{
+    ViewData["Title"] = "Doctor Profile";
+    Layout = "_PatientLayout";
+}
+
+<h2><i class="fas fa-user-md"></i> Doctor Profile</h2>
+<hr />
+
+@if (Model.Profile == null)
+{
+    <div class="alert alert-warning">Doctor not found.</div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Dr. @Model.Profile.Name</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tr><th>Department:</th><td>@Model.Profile.Department</td></tr>
+                        <tr><th>Phone:</th><td>@Model.Profile.Phone</td></tr>
+                        <tr><th>Gender:</th><td>@(Model.Profile.Gender == "M" ? "Male" : "Female")</td></tr>
+                        <tr><th>Age:</th><td>@Model.Profile.Age years</td></tr>
+                        <tr><th>Qualification:</th><td>@Model.Profile.Qualification</td></tr>
+                        <tr><th>Specialization:</th><td>@Model.Profile.Specialization</td></tr>
+                        <tr><th>Work Experience:</th><td>@Model.Profile.WorkExperience years</td></tr>
+                        <tr><th>Charges/Visit:</th><td>$@Model.Profile.ChargesPerVisit</td></tr>
+                        <tr><th>Repute Index:</th><td>@Model.Profile.ReputeIndex.ToString("F1")</td></tr>
+                        <tr><th>Patients Treated:</th><td>@Model.Profile.PatientsTreated</td></tr>
+                    </table>
+                    <a href="/Patient/AppointmentTaker?doctorId=@Model.Profile.DoctorId" class="btn btn-success">
+                        <i class="fas fa-calendar-plus"></i> Book Appointment
+                    </a>
+                    <a href="/Patient/ViewDoctors" class="btn btn-secondary ms-2">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
