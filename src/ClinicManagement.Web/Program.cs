@@ -2,6 +2,9 @@ using ClinicManagement.Application.Extensions;
 using ClinicManagement.Infrastructure.Extensions;
 using Serilog;
 
+// Enable legacy timestamp behavior for PostgreSQL DateTime compatibility
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure Serilog

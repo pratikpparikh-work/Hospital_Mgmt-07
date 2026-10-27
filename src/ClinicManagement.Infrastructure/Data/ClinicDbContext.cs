@@ -5,6 +5,7 @@ namespace ClinicManagement.Infrastructure.Data;
 
 /// <summary>
 /// Entity Framework Core database context for the Clinic Management System.
+/// Configured for PostgreSQL 16 with snake_case naming conventions.
 /// </summary>
 public class ClinicDbContext : DbContext
 {
@@ -21,7 +22,22 @@ public class ClinicDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // Set default schema to "public" for PostgreSQL
+        modelBuilder.HasDefaultSchema("public");
+
+        // Enable PostgreSQL extensions
+        modelBuilder.HasPostgresExtension("uuid-ossp");
+
         // Apply all entity configurations from this assembly
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ClinicDbContext).Assembly);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            // Enable legacy timestamp behavior for PostgreSQL DateTime compatibility
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        }
     }
 }

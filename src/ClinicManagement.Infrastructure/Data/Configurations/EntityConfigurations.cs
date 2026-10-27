@@ -6,16 +6,17 @@ namespace ClinicManagement.Infrastructure.Data.Configurations;
 
 /// <summary>
 /// EF Core configuration for LoginTable entity.
+/// Configured for PostgreSQL 16 compatibility.
 /// </summary>
 public class LoginTableConfiguration : IEntityTypeConfiguration<LoginTable>
 {
     public void Configure(EntityTypeBuilder<LoginTable> builder)
     {
-        builder.ToTable("LoginTable");
+        builder.ToTable("login_table");
         builder.HasKey(l => l.LoginId);
-        builder.Property(l => l.LoginId).HasColumnName("LoginID").ValueGeneratedOnAdd();
-        builder.Property(l => l.Password).HasMaxLength(20).IsRequired();
-        builder.Property(l => l.Email).HasMaxLength(30).IsRequired();
+        builder.Property(l => l.LoginId).HasColumnName("login_id").ValueGeneratedOnAdd();
+        builder.Property(l => l.Password).HasColumnType("varchar(20)").IsRequired();
+        builder.Property(l => l.Email).HasColumnType("varchar(30)").IsRequired();
         builder.HasIndex(l => l.Email).IsUnique();
         builder.Property(l => l.Type).IsRequired();
     }
@@ -23,19 +24,20 @@ public class LoginTableConfiguration : IEntityTypeConfiguration<LoginTable>
 
 /// <summary>
 /// EF Core configuration for Patient entity.
+/// Configured for PostgreSQL 16 compatibility.
 /// </summary>
 public class PatientConfiguration : IEntityTypeConfiguration<Patient>
 {
     public void Configure(EntityTypeBuilder<Patient> builder)
     {
-        builder.ToTable("Patient");
+        builder.ToTable("patient");
         builder.HasKey(p => p.PatientId);
-        builder.Property(p => p.PatientId).HasColumnName("PatientID").ValueGeneratedNever();
-        builder.Property(p => p.Name).HasMaxLength(30).IsRequired();
-        builder.Property(p => p.Phone).HasMaxLength(11).IsFixedLength();
-        builder.Property(p => p.Address).HasMaxLength(40);
-        builder.Property(p => p.BirthDate).IsRequired();
-        builder.Property(p => p.Gender).HasMaxLength(1).IsFixedLength().IsRequired();
+        builder.Property(p => p.PatientId).HasColumnName("patient_id").ValueGeneratedNever();
+        builder.Property(p => p.Name).HasColumnType("varchar(30)").IsRequired();
+        builder.Property(p => p.Phone).HasColumnType("char(11)");
+        builder.Property(p => p.Address).HasColumnType("varchar(40)");
+        builder.Property(p => p.BirthDate).HasColumnType("date").IsRequired();
+        builder.Property(p => p.Gender).HasColumnType("char(1)").IsRequired();
 
         builder.HasOne(p => p.Login)
             .WithOne(l => l.Patient)
@@ -45,42 +47,44 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
 
 /// <summary>
 /// EF Core configuration for Department entity.
+/// Configured for PostgreSQL 16 compatibility.
 /// </summary>
 public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
 {
     public void Configure(EntityTypeBuilder<Department> builder)
     {
-        builder.ToTable("Department");
+        builder.ToTable("department");
         builder.HasKey(d => d.DeptNo);
-        builder.Property(d => d.DeptNo).ValueGeneratedNever();
-        builder.Property(d => d.DeptName).HasMaxLength(30).IsRequired();
+        builder.Property(d => d.DeptNo).HasColumnName("dept_no").ValueGeneratedNever();
+        builder.Property(d => d.DeptName).HasColumnType("varchar(30)").IsRequired();
         builder.HasIndex(d => d.DeptName).IsUnique();
-        builder.Property(d => d.Description).HasMaxLength(1000);
+        builder.Property(d => d.Description).HasColumnType("varchar(1000)");
     }
 }
 
 /// <summary>
 /// EF Core configuration for Doctor entity.
+/// Configured for PostgreSQL 16 compatibility.
 /// </summary>
 public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
 {
     public void Configure(EntityTypeBuilder<Doctor> builder)
     {
-        builder.ToTable("Doctor");
+        builder.ToTable("doctor");
         builder.HasKey(d => d.DoctorId);
-        builder.Property(d => d.DoctorId).HasColumnName("DoctorID").ValueGeneratedNever();
-        builder.Property(d => d.Name).HasMaxLength(30).IsRequired();
-        builder.Property(d => d.Phone).HasMaxLength(11).IsFixedLength();
-        builder.Property(d => d.Address).HasMaxLength(40);
-        builder.Property(d => d.BirthDate).IsRequired();
-        builder.Property(d => d.Gender).HasMaxLength(1).IsFixedLength().IsRequired();
-        builder.Property(d => d.ChargesPerVisit).HasColumnName("Charges_Per_Visit").IsRequired();
-        builder.Property(d => d.MonthlySalary).HasColumnName("MonthlySalary");
-        builder.Property(d => d.ReputeIndex).HasColumnName("ReputeIndex");
-        builder.Property(d => d.PatientsTreated).HasColumnName("Patients_Treated").HasDefaultValue(0).IsRequired();
-        builder.Property(d => d.Qualification).HasMaxLength(100).IsRequired();
-        builder.Property(d => d.Specialization).HasMaxLength(100);
-        builder.Property(d => d.WorkExperience).HasColumnName("Work_Experience");
+        builder.Property(d => d.DoctorId).HasColumnName("doctor_id").ValueGeneratedNever();
+        builder.Property(d => d.Name).HasColumnType("varchar(30)").IsRequired();
+        builder.Property(d => d.Phone).HasColumnType("char(11)");
+        builder.Property(d => d.Address).HasColumnType("varchar(40)");
+        builder.Property(d => d.BirthDate).HasColumnType("date").IsRequired();
+        builder.Property(d => d.Gender).HasColumnType("char(1)").IsRequired();
+        builder.Property(d => d.ChargesPerVisit).HasColumnName("charges_per_visit").HasColumnType("numeric(18,2)").IsRequired();
+        builder.Property(d => d.MonthlySalary).HasColumnName("monthly_salary").HasColumnType("numeric(18,2)");
+        builder.Property(d => d.ReputeIndex).HasColumnName("repute_index").HasColumnType("numeric(5,2)");
+        builder.Property(d => d.PatientsTreated).HasColumnName("patients_treated").HasDefaultValue(0).IsRequired();
+        builder.Property(d => d.Qualification).HasColumnType("varchar(100)").IsRequired();
+        builder.Property(d => d.Specialization).HasColumnType("varchar(100)");
+        builder.Property(d => d.WorkExperience).HasColumnName("work_experience");
         builder.Property(d => d.Status).IsRequired();
 
         builder.HasOne(d => d.Department)
@@ -95,43 +99,46 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
 
 /// <summary>
 /// EF Core configuration for OtherStaff entity.
+/// Configured for PostgreSQL 16 compatibility.
 /// </summary>
 public class OtherStaffConfiguration : IEntityTypeConfiguration<OtherStaff>
 {
     public void Configure(EntityTypeBuilder<OtherStaff> builder)
     {
-        builder.ToTable("OtherStaff");
+        builder.ToTable("other_staff");
         builder.HasKey(s => s.StaffId);
-        builder.Property(s => s.StaffId).HasColumnName("StaffID").ValueGeneratedOnAdd();
-        builder.Property(s => s.Name).HasMaxLength(30).IsRequired();
-        builder.Property(s => s.Phone).HasMaxLength(11).IsFixedLength();
-        builder.Property(s => s.Address).HasMaxLength(30);
-        builder.Property(s => s.Designation).HasMaxLength(15).IsRequired();
-        builder.Property(s => s.Gender).HasMaxLength(1).IsFixedLength().IsRequired();
-        builder.Property(s => s.HighestQualification).HasColumnName("Highest_Qualification").HasMaxLength(50);
-        builder.Property(s => s.Salary);
+        builder.Property(s => s.StaffId).HasColumnName("staff_id").ValueGeneratedOnAdd();
+        builder.Property(s => s.Name).HasColumnType("varchar(30)").IsRequired();
+        builder.Property(s => s.Phone).HasColumnType("char(11)");
+        builder.Property(s => s.Address).HasColumnType("varchar(30)");
+        builder.Property(s => s.Designation).HasColumnType("varchar(15)").IsRequired();
+        builder.Property(s => s.Gender).HasColumnType("char(1)").IsRequired();
+        builder.Property(s => s.HighestQualification).HasColumnName("highest_qualification").HasColumnType("varchar(50)");
+        builder.Property(s => s.Salary).HasColumnType("numeric(18,2)");
     }
 }
 
 /// <summary>
 /// EF Core configuration for Appointment entity.
+/// Configured for PostgreSQL 16 compatibility.
 /// </summary>
 public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
 {
     public void Configure(EntityTypeBuilder<Appointment> builder)
     {
-        builder.ToTable("Appointment");
+        builder.ToTable("appointment");
         builder.HasKey(a => a.AppointId);
-        builder.Property(a => a.AppointId).HasColumnName("AppointID").ValueGeneratedOnAdd();
-        builder.Property(a => a.AppointmentStatus).HasColumnName("Appointment_Status");
-        builder.Property(a => a.BillAmount).HasColumnName("Bill_Amount");
-        builder.Property(a => a.BillStatus).HasColumnName("Bill_Status").HasMaxLength(10);
-        builder.Property(a => a.DoctorNotification).HasColumnName("DoctorNotification");
-        builder.Property(a => a.PatientNotification).HasColumnName("PatientNotification");
-        builder.Property(a => a.FeedbackStatus).HasColumnName("FeedbackStatus");
-        builder.Property(a => a.Disease).HasMaxLength(100);
-        builder.Property(a => a.Progress).HasMaxLength(100);
-        builder.Property(a => a.Prescription).HasMaxLength(100);
+        builder.Property(a => a.AppointId).HasColumnName("appoint_id").ValueGeneratedOnAdd();
+        builder.Property(a => a.AppointmentStatus).HasColumnName("appointment_status");
+        builder.Property(a => a.BillAmount).HasColumnName("bill_amount").HasColumnType("numeric(18,2)");
+        builder.Property(a => a.BillStatus).HasColumnName("bill_status").HasColumnType("varchar(10)");
+        builder.Property(a => a.DoctorNotification).HasColumnName("doctor_notification");
+        builder.Property(a => a.PatientNotification).HasColumnName("patient_notification");
+        builder.Property(a => a.FeedbackStatus).HasColumnName("feedback_status");
+        builder.Property(a => a.Disease).HasColumnType("varchar(100)");
+        builder.Property(a => a.Progress).HasColumnType("varchar(100)");
+        builder.Property(a => a.Prescription).HasColumnType("varchar(100)");
+        builder.Property(a => a.Date).HasColumnType("timestamp");
 
         builder.HasOne(a => a.Doctor)
             .WithMany(d => d.Appointments)
