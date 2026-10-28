@@ -2,9 +2,9 @@
 <CoverageSession>
   <Summary numSequencePoints="2967" visitedSequencePoints="1116" numBranchPoints="512" visitedBranchPoints="161" sequenceCoverage="37.61" branchCoverage="31.44" maxCyclomaticComplexity="602" minCyclomaticComplexity="76" visitedClasses="121" numClasses="273" visitedMethods="404" numMethods="657" />
   <Modules>
-    <Module hash="9C27ECD1-DB87-4D06-867F-F6CAA70AA51F">
+    <Module hash="7F1D7FB2-4C00-4FAE-A352-799350D0E969">
       <ModulePath>ClinicManagement.Infrastructure.dll</ModulePath>
-      <ModuleTime>2026-10-27T05:48:33</ModuleTime>
+      <ModuleTime>2026-10-28T06:06:43</ModuleTime>
       <ModuleName>ClinicManagement.Infrastructure</ModuleName>
       <Files>
         <File uid="1" fullPath="/modernize-data/studio-data/TNT1001/APP321326/transformed-code/170/studio-workspace/HospitalMgmt07/src/ClinicManagement.Infrastructure/Repositories/AppointmentRepository.cs" />
@@ -1861,9 +1861,9 @@
         </Class>
       </Classes>
     </Module>
-    <Module hash="BBA8957F-793B-41F3-A52C-6EAEA5EC3FAC">
+    <Module hash="B6C1F221-DCBD-4527-9F7C-7F2BD099C7A5">
       <ModulePath>ClinicManagement.Application.dll</ModulePath>
-      <ModuleTime>2026-10-27T05:48:33</ModuleTime>
+      <ModuleTime>2026-10-28T06:06:43</ModuleTime>
       <ModuleName>ClinicManagement.Application</ModuleName>
       <Files>
         <File uid="10" fullPath="/modernize-data/studio-data/TNT1001/APP321326/transformed-code/170/studio-workspace/HospitalMgmt07/src/ClinicManagement.Application/Services/AdminService.cs" />
@@ -3672,9 +3672,9 @@
         </Class>
       </Classes>
     </Module>
-    <Module hash="2950D6FF-9809-4CA8-AA88-8B918AE6D1E2">
+    <Module hash="655D0536-817D-485D-A503-D07E7C79B238">
       <ModulePath>ClinicManagement.Web.dll</ModulePath>
-      <ModuleTime>2026-10-27T05:48:33</ModuleTime>
+      <ModuleTime>2026-10-28T06:06:43</ModuleTime>
       <ModuleName>ClinicManagement.Web</ModuleName>
       <Files>
         <File uid="15" fullPath="/modernize-data/studio-data/TNT1001/APP321326/transformed-code/170/studio-workspace/HospitalMgmt07/src/ClinicManagement.Web/Program.cs" />
@@ -9353,9 +9353,9 @@
         </Class>
       </Classes>
     </Module>
-    <Module hash="69171D53-3685-46A7-B577-4827F5C0DF0A">
+    <Module hash="DF7F1A8E-43C4-4D84-A7C5-2765F904F973">
       <ModulePath>ClinicManagement.Domain.dll</ModulePath>
-      <ModuleTime>2026-10-27T05:48:33</ModuleTime>
+      <ModuleTime>2026-10-28T06:06:43</ModuleTime>
       <ModuleName>ClinicManagement.Domain</ModuleName>
       <Files>
         <File uid="65" fullPath="/modernize-data/studio-data/TNT1001/APP321326/transformed-code/170/studio-workspace/HospitalMgmt07/src/ClinicManagement.Domain/Exceptions/DomainExceptions.cs" />
